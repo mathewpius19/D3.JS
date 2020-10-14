@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <svg width=100 height=100 style='border: 1px dashed'>
+        <path d='M0,20 C-22,40 -22,50 -25,65 M-25,65 L-25,45 M-25,45 C-35,65 -35,80 0,100 M0,20 C22,40 22,50 25,65 M25,65 L25,45 M25,45 C35,60 35,75 0,100' fill='none' stroke='#000' stroke-width=2 transform='translate(50,0)' />
+      </svg>
+      <code>100px</code>
+</body>
+
+
+<script>
+    const svg = html`<svg width=${width} height=${svgHeight}></svg>`
+    d3.select(svg).selectAll('path')
+    .data(movies).enter().append('path')
+    .attr('transform', (d,i)=>`translate(${calculateGridPos(i)})`)
+    .attr('d',d=>(pathObj[d.rated]))
+    .attr('fill', d=>colorObj[d.genres[0]]||colorObj.Other)
+    .attr('stroke', d=>colorObj[d.genres[0]]||colorObj.Other)
+    .attr('fill-opacity',0.5)
+    .attr('stroke-width',2)
+
+flower={
+    const colorScale=d3.scaleOrdinal()
+    .domain(topGenres)
+    .range(petalColors)
+    .unknown(colorObj.Other)
+	
+	const pathScale=d3.scaleOrdinal()
+    .range(petalPaths)
+
+	const minMaxRating=d3.extent(movies,d=>d.rating)
+  const sizeScale=d3.scaleLinear()
+    .domain(minMaxRating)
+    .range(0.2,0.75)
+
+	const minMaxVotes=d3.extent(movies, d=>d.votes)
+  const numPetalScale=d3.scaleQuantize()
+    .domain(minMaxVotes)
+    .range([5,6,7,8,9,10])
+  return _.map(movies, (d, i) => {
+    return {
+      title: d.title,
+      color:colorScale(d.genres[0]),
+      path:pathScale(d.rated),
+      scale:sizeScale(d.rating),
+      numPetals:numPetalScale(d.votes),
+      translate: calculateGridPos(i), // util function that returns [x, y]
+}
+</script>
+</html>
